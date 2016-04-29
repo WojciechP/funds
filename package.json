@@ -7,8 +7,7 @@
     "build": "rm -rf dist/ && tsconfig . && tsc",
     "prepublish": "typings install && npm build",
     "test": "karma start test.karma.config.js",
-    "tdd": "karma start test.karma.config.js --no-single-run",
-    "postinstall": "typings install --production"
+    "tdd": "karma start test.karma.config.js --no-single-run"
   },
   "author": "Wojciech Ptak",
   "license": "ISC",
