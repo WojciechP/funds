@@ -1,27 +1,24 @@
 import { expect } from 'chai'
+
 import { Getter, mkGetter } from 'funds/optics/getter'
 import { Either, left, right } from 'funds/data'
 
-describe('Getters', () => {
-  const together = mkGetter((e: Either<number, number>) => e.cata<[number, number]>(
-    (n => [n, null]),
-    (n => [null, n])
-  ))
+import { painterPat, patPaycheck, Paycheck, Employee } from '../seed/data-seed'
 
-  it('gets attributes', () => {
-    expect(together.get(right(5))).to.eql([null, 5])
+describe('Getters', () => {
+  const recipient = mkGetter((pc: Paycheck) => pc.recipient)
+
+  it('get attributes', () => {
+    expect(recipient.get(patPaycheck)).to.eql(painterPat)
+    expect(recipient(patPaycheck)).to.eql(painterPat)
   })
-  it('has the methods bound', () => {
-    const get = together.get
-    expect(get(left(4))).to.eql([4, null])
+  it('have the methods bound', () => {
+    const get = recipient.get
+    expect(get(patPaycheck)).to.eql(painterPat)
   })
-  it('composes', () => {
-    const second = ([a, b]: [number, number]) => b
-    const comp = together.compose
-    const getright = together.compose(second)
-    const getrightget = getright.get
-    expect(getrightget(right(5))).to.eql(5)
-    expect(getrightget(left(2))).to.eql(null)
+  it('compose with other getters', () => {
+    const recipientName = recipient.compose((e: Employee) => e.name)
+    expect(recipientName(patPaycheck)).to.eql('Pat Peterson')
   })
 
 })
