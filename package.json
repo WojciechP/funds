@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist/ && tsconfig . && tsc",
+    "prepublish": "typings install && npm build",
     "test": "karma start test.karma.config.js",
     "tdd": "karma start test.karma.config.js --no-single-run",
-    "prepublish": "test",
     "postinstall": "typings install --production"
   },
   "author": "Wojciech Ptak",
@@ -31,6 +31,8 @@
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",
     "ts-loader": "^0.8.2",
+    "tsconfig-cli": "^2.0.0",
+    "tsconfig-glob": "^0.4.3",
     "typescript": "^1.8.10",
     "typings": "^0.8.1",
     "webpack": "^1.13.0"
