@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "module": "CommonJS",
+        "target": "es6",
+        "noImplicitAny": true,
+        "outDir": "dist",
+        "experimentalDecorators": true
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "files": [
+        "typings/main.d.ts",
+        "src/core/index.ts",
+        "src/core/typeclass.ts",
+        "src/data/either.ts",
+        "src/data/index.ts",
+        "src/data/maybe.ts",
+        "src/index.ts",
+        "src/optics/getter.ts",
+        "src/optics/index.ts",
+        "src/optics/internal.ts",
+        "src/optics/lens.ts",
+        "src/optics/prism.ts",
+        "src/optics/setter.ts"
+    ],
+    "filesGlob": [
+        "src/**/*.ts",
+        "typings/main.d.ts"
+    ]
+}

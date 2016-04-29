@@ -1,0 +1,6 @@
+dist/
+npm-debug.log
+*.sw[op]
+__test/
+node_modules/
+typings/
