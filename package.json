@@ -1,6 +1,6 @@
 {
   "name": "funds",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Functional utilities and data structures",
   "main": "dist/index.js",
   "scripts": {

@@ -3,10 +3,10 @@ import { expect } from 'chai'
 import { identity } from 'funds/core'
 import { Either, left, right } from 'funds/data'
 import { Labelled, lab4, stringed } from './hierarchy-seed'
-import { Prism, mkPrism, mkLens, mkSetter } from 'funds/optics'
+import { PPrism, mkPrism, mkLens, mkSetter } from 'funds/optics'
 
 describe('Prisms', () => {
-  const lp: Prism<Either<number, Labelled<number>>, string, Labelled<number>, number> =
+  const lp: PPrism<Either<number, Labelled<number>>, string, Labelled<number>, number> =
     mkPrism(
       (eln: Either<number, Labelled<number>>) => eln.leftMap(n => `Extraction failed: ${n}`),
       (n: number) => `Upcasted ${n}`)
@@ -21,7 +21,7 @@ describe('Prisms', () => {
   })
   describe('compose', () => {
     it('with prisms', () => {
-      const zero: Prism<Labelled<number>, number, string, number> =
+      const zero: PPrism<Labelled<number>, number, string, number> =
         mkPrism<Labelled<number>, number, string, number>(
           (ln: Labelled<number>) => ln.x === 0 ? right(ln.label) : left(ln.x),
           identity as (n: number) => number

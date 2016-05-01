@@ -3,9 +3,9 @@ import { autobind } from 'core-decorators'
 import { Fun, Fun2, mkFun, mkFun2, identity } from '../core'
 import { Either, left, right } from '../data'
 import { Getter, mkGetter, GetterNoApply } from './getter'
-import { Setter } from './setter'
-import { Lens, LensNoApply } from './lens'
-import { Prism } from './prism'
+import { PSetter } from './setter'
+import { PLens, PLensNoApply } from './lens'
+import { PPrism } from './prism'
 
 export interface OpticProps<S, T, A, B> {
   get?: (s: S) => A
@@ -25,9 +25,9 @@ export interface OpticQuality {
 @autobind
 export class Optic<S, T, A, B> implements OpticProps<S, T, A, B>,
     GetterNoApply<S, A>,
-    Setter<S, T, A, B>,
-    LensNoApply<S, T, A, B>,
-    Prism<S, T, A, B> {
+    PSetter<S, T, A, B>,
+    PLensNoApply<S, T, A, B>,
+    PPrism<S, T, A, B> {
   // Note: all these are optional; depending on their presence,
   // one gets different optics. They are represented only in
   // interface hierarchy (as opposed to class hierarchy)
@@ -84,18 +84,18 @@ export class Optic<S, T, A, B> implements OpticProps<S, T, A, B>,
   // This is an artifact of all optics being the same class and appears only in the signatures
   // in package-internal class `Optics`. The composition signatures on exproted interfaces
   // are correct.
-  public compose<X, Y>(next: Lens<A, B, X, Y>): Lens<S, T, X, Y>
-  public compose<X, Y>(next: Prism<A, B, X, Y>): Prism<S, T, X, Y>
-  public compose<X, Y>(next: Setter<A, B, X, Y>): Setter<S, T, X, Y>
+  public compose<X, Y>(next: PLens<A, B, X, Y>): PLens<S, T, X, Y>
+  public compose<X, Y>(next: PPrism<A, B, X, Y>): PPrism<S, T, X, Y>
+  public compose<X, Y>(next: PSetter<A, B, X, Y>): PSetter<S, T, X, Y>
   // public compose<BB>(next: Review<B, BB>): Review<BB, T>
   public compose<AA>(nextGetter: (a: A) => AA): Getter<S, AA>
-  public compose<X, Y>(next: Lens<A, B, X, Y>
-                           | Prism<A, B, X, Y>
-                           | Setter<A, B, X, Y>
-                           | ((a: A) => X)): Setter<S, T, X, Y>
+  public compose<X, Y>(next: PLens<A, B, X, Y>
+                           | PPrism<A, B, X, Y>
+                           | PSetter<A, B, X, Y>
+                           | ((a: A) => X)): PSetter<S, T, X, Y>
                                            | Getter<S, X>
-                                           | Prism<S, T, X, Y>
-                                           | Lens<S, T, X, Y> {
+                                           | PPrism<S, T, X, Y>
+                                           | PLens<S, T, X, Y> {
     if (next instanceof Function) {
       return mkGetter((s: S) => next(this.get(s)))
     }
