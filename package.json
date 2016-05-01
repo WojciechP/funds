@@ -11,6 +11,10 @@
   },
   "author": "Wojciech Ptak",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WojciechP/funds"
+  },
   "dependencies": {
     "core-decorators": "^0.12.2"
   },
