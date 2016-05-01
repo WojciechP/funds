@@ -1,10 +1,10 @@
 import { expect } from 'chai'
-import { Setter, mkSetter } from 'funds/optics/setter'
+import { PSetter, mkSetter } from 'funds/optics/setter'
 
 import { Labelled, int2str, lab4, stringed } from './hierarchy-seed'
 
 describe('Setters', () => {
-  const xsetter: Setter<Labelled<number>, Labelled<string>, number, string> = mkSetter((f: (n: number) => string) => (ln: Labelled<number>) => {
+  const xsetter: PSetter<Labelled<number>, Labelled<string>, number, string> = mkSetter((f: (n: number) => string) => (ln: Labelled<number>) => {
     return { label: ln.label, x: f(ln.x) }
   })
 
@@ -20,8 +20,8 @@ describe('Setters', () => {
   })
 
   describe('compose', () => {
-    const andHex: Setter<number, string, number, number> = mkSetter((f: (n: number) => number) => (n: number) => f(n).toString(16))
-    const labelledHex: Setter<Labelled<number>, Labelled<string>, number, number> = xsetter.compose(andHex)
+    const andHex: PSetter<number, string, number, number> = mkSetter((f: (n: number) => number) => (n: number) => f(n).toString(16))
+    const labelledHex: PSetter<Labelled<number>, Labelled<string>, number, number> = xsetter.compose(andHex)
     it('sets deep props', () => {
       expect(labelledHex.modify((n: number) => n+10, lab4)).to.eql({ label: 'Lab4', x: 'e' })
     })
