@@ -4,7 +4,8 @@ module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['mocha', 'chai'],
-    files: [
+    files: [,
+      'node_modules/babel-polyfill/browser.js',
       'test/**/*.ts'
     ],
     exclude: ['test/**/*-seed.ts'],

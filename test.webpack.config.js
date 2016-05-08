@@ -8,7 +8,7 @@ module.exports = {
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '']
   },
-  entry: ['babel-polyfill', 'src/index.ts'],
+  entry: ['src/index.ts'],
   output: {
     filename: './__test/index.es5.js'
   },

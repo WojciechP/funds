@@ -1,4 +1,4 @@
 export { Getter, mkGetter } from './getter'
-export { PSetter, mkSetter } from './setter'
-export { PLens, mkLens } from './lens'
-export { PPrism, mkPrism } from './prism'
+export { Setter, PSetter, mkSetter } from './setter'
+export { Lens, PLens, mkLens } from './lens'
+export { Prism, PPrism, mkPrism } from './prism'
